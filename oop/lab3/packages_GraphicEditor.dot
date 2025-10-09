@@ -1,0 +1,30 @@
+digraph "packages_GraphicEditor" {
+rankdir=BT
+charset="utf-8"
+"lab3" [color="black", label=<lab3>, shape="box", style="solid"];
+"lab3.editor" [color="black", label=<lab3.editor>, shape="box", style="solid"];
+"lab3.main" [color="black", label=<lab3.main>, shape="box", style="solid"];
+"lab3.shapes" [color="black", label=<lab3.shapes>, shape="box", style="solid"];
+"lab3.shapes.base" [color="black", label=<lab3.shapes.base>, shape="box", style="solid"];
+"lab3.shapes.ellipse" [color="black", label=<lab3.shapes.ellipse>, shape="box", style="solid"];
+"lab3.shapes.line" [color="black", label=<lab3.shapes.line>, shape="box", style="solid"];
+"lab3.shapes.point" [color="black", label=<lab3.shapes.point>, shape="box", style="solid"];
+"lab3.shapes.rectangle" [color="black", label=<lab3.shapes.rectangle>, shape="box", style="solid"];
+"lab3.shapes.star" [color="black", label=<lab3.shapes.star>, shape="box", style="solid"];
+"lab3.utils" [color="black", label=<lab3.utils>, shape="box", style="solid"];
+"lab3.utils.tooltips" [color="black", label=<lab3.utils.tooltips>, shape="box", style="solid"];
+"lab3.editor" -> "lab3.shapes" [arrowhead="open", arrowtail="none"];
+"lab3.editor" -> "lab3.utils" [arrowhead="open", arrowtail="none"];
+"lab3.main" -> "lab3.editor" [arrowhead="open", arrowtail="none"];
+"lab3.shapes" -> "lab3.shapes.ellipse" [arrowhead="open", arrowtail="none"];
+"lab3.shapes" -> "lab3.shapes.line" [arrowhead="open", arrowtail="none"];
+"lab3.shapes" -> "lab3.shapes.point" [arrowhead="open", arrowtail="none"];
+"lab3.shapes" -> "lab3.shapes.rectangle" [arrowhead="open", arrowtail="none"];
+"lab3.shapes" -> "lab3.shapes.star" [arrowhead="open", arrowtail="none"];
+"lab3.shapes.ellipse" -> "lab3.shapes.base" [arrowhead="open", arrowtail="none"];
+"lab3.shapes.line" -> "lab3.shapes.base" [arrowhead="open", arrowtail="none"];
+"lab3.shapes.point" -> "lab3.shapes.base" [arrowhead="open", arrowtail="none"];
+"lab3.shapes.rectangle" -> "lab3.shapes.base" [arrowhead="open", arrowtail="none"];
+"lab3.shapes.star" -> "lab3.shapes.base" [arrowhead="open", arrowtail="none"];
+"lab3.utils" -> "lab3.utils.tooltips" [arrowhead="open", arrowtail="none"];
+}

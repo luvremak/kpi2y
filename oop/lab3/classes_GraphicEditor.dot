@@ -1,0 +1,16 @@
+digraph "classes_GraphicEditor" {
+rankdir=BT
+charset="utf-8"
+"lab3.shapes.ellipse.Ellipse" [color="black", fontcolor="black", label=<{Ellipse|cx<br ALIGN="LEFT"/>cy<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>draw_rubber(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab3.editor.GraphicEditor" [color="black", fontcolor="black", label=<{GraphicEditor|SHAPES_CONFIG : dict<br ALIGN="LEFT"/>canvas : Canvas<br ALIGN="LEFT"/>current_shape_type : str<br ALIGN="LEFT"/>is_drawing : bool<br ALIGN="LEFT"/>objects_menu : Menu<br ALIGN="LEFT"/>root<br ALIGN="LEFT"/>rubber_id : NoneType<br ALIGN="LEFT"/>shape_var : StringVar<br ALIGN="LEFT"/>shapes : list<br ALIGN="LEFT"/>shapes_count_label : Label<br ALIGN="LEFT"/>start_x : int<br ALIGN="LEFT"/>start_y : int<br ALIGN="LEFT"/>status_label : Label<br ALIGN="LEFT"/>toolbar_buttons : dict<br ALIGN="LEFT"/>|clear_canvas()<br ALIGN="LEFT"/>on_mouse_down(event)<br ALIGN="LEFT"/>on_mouse_move(event)<br ALIGN="LEFT"/>on_mouse_up(event)<br ALIGN="LEFT"/>redraw_canvas()<br ALIGN="LEFT"/>set_shape_type(shape_type)<br ALIGN="LEFT"/>setup_canvas()<br ALIGN="LEFT"/>setup_menu()<br ALIGN="LEFT"/>setup_statusbar()<br ALIGN="LEFT"/>setup_toolbar()<br ALIGN="LEFT"/>show_about()<br ALIGN="LEFT"/>update_shapes_count()<br ALIGN="LEFT"/>update_toolbar_selection()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab3.shapes.line.Line" [color="black", fontcolor="black", label=<{Line|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>draw_rubber(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab3.shapes.point.Point" [color="black", fontcolor="black", label=<{Point|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>draw_rubber(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab3.shapes.rectangle.Rectangle" [color="black", fontcolor="black", label=<{Rectangle|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>draw_rubber(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab3.shapes.base.Shape" [color="black", fontcolor="black", label=<{Shape|x1<br ALIGN="LEFT"/>x2<br ALIGN="LEFT"/>y1<br ALIGN="LEFT"/>y2<br ALIGN="LEFT"/>|<I>draw</I>(canvas)<br ALIGN="LEFT"/><I>draw_rubber</I>(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab3.shapes.star.Star" [color="black", fontcolor="black", label=<{Star|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>draw_rubber(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab3.shapes.ellipse.Ellipse" -> "lab3.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+"lab3.shapes.line.Line" -> "lab3.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+"lab3.shapes.point.Point" -> "lab3.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+"lab3.shapes.rectangle.Rectangle" -> "lab3.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+"lab3.shapes.star.Star" -> "lab3.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+}
