@@ -1,0 +1,22 @@
+digraph "classes_lab4" {
+rankdir=BT
+charset="utf-8"
+"lab4.shapes.mixins.CircleEndsMixin" [color="black", fontcolor="black", label=<{CircleEndsMixin|<br ALIGN="LEFT"/>|draw_circle_ends(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.complex_shapes.CubeFrame" [color="black", fontcolor="black", label=<{CubeFrame|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.mixins.CubeFrameMixin" [color="black", fontcolor="black", label=<{CubeFrameMixin|<br ALIGN="LEFT"/>|draw_cube_frame(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.simple_shapes.EllipseShape" [color="black", fontcolor="black", label=<{EllipseShape|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.simple_shapes.LineShape" [color="black", fontcolor="black", label=<{LineShape|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.complex_shapes.LineWithCircles" [color="black", fontcolor="black", label=<{LineWithCircles|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.editor.MyEditor" [color="black", fontcolor="black", label=<{MyEditor|MAX_SHAPES : int<br ALIGN="LEFT"/>canvas : Canvas<br ALIGN="LEFT"/>current_shape : NoneType<br ALIGN="LEFT"/>drawing : bool<br ALIGN="LEFT"/>info_label : Label<br ALIGN="LEFT"/>menu_items : dict<br ALIGN="LEFT"/>root<br ALIGN="LEFT"/>rubber_line : NoneType<br ALIGN="LEFT"/>shape_type : str<br ALIGN="LEFT"/>shapes : list<br ALIGN="LEFT"/>start_x : int<br ALIGN="LEFT"/>start_y : int<br ALIGN="LEFT"/>toolbar_buttons : dict<br ALIGN="LEFT"/>|clear_all()<br ALIGN="LEFT"/>create_menu()<br ALIGN="LEFT"/>create_toolbar()<br ALIGN="LEFT"/>on_init_menu_popup()<br ALIGN="LEFT"/>on_mouse_down(event)<br ALIGN="LEFT"/>on_mouse_move(event)<br ALIGN="LEFT"/>on_mouse_up(event)<br ALIGN="LEFT"/>redraw()<br ALIGN="LEFT"/>set_shape_type(shape_type)<br ALIGN="LEFT"/>update_info(shape_name)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.simple_shapes.PointShape" [color="black", fontcolor="black", label=<{PointShape|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.simple_shapes.RectShape" [color="black", fontcolor="black", label=<{RectShape|<br ALIGN="LEFT"/>|draw(canvas)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.base.Shape" [color="black", fontcolor="black", label=<{Shape|x1 : int<br ALIGN="LEFT"/>x2 : int<br ALIGN="LEFT"/>y1 : int<br ALIGN="LEFT"/>y2 : int<br ALIGN="LEFT"/>|<I>draw</I>(canvas)<br ALIGN="LEFT"/>set_coords(x1, y1, x2, y2)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"lab4.shapes.complex_shapes.CubeFrame" -> "lab4.shapes.mixins.CubeFrameMixin" [arrowhead="empty", arrowtail="none"];
+"lab4.shapes.complex_shapes.CubeFrame" -> "lab4.shapes.simple_shapes.RectShape" [arrowhead="empty", arrowtail="none"];
+"lab4.shapes.complex_shapes.LineWithCircles" -> "lab4.shapes.mixins.CircleEndsMixin" [arrowhead="empty", arrowtail="none"];
+"lab4.shapes.complex_shapes.LineWithCircles" -> "lab4.shapes.simple_shapes.LineShape" [arrowhead="empty", arrowtail="none"];
+"lab4.shapes.simple_shapes.EllipseShape" -> "lab4.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+"lab4.shapes.simple_shapes.LineShape" -> "lab4.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+"lab4.shapes.simple_shapes.PointShape" -> "lab4.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+"lab4.shapes.simple_shapes.RectShape" -> "lab4.shapes.base.Shape" [arrowhead="empty", arrowtail="none"];
+}
