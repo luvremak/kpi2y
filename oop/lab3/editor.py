@@ -110,22 +110,20 @@ class GraphicEditor:
         self.current_shape = ShapeFactory.create_shape(self.current_shape_type, event.x, event.y)
 
     def on_mouse_move(self, event):
-        if not self.current_shape:
-            return
-        self.current_shape.update(event.x, event.y)
-        self.current_shape.show_rubber(self.canvas)
+        getattr(self.current_shape, 'update', lambda x, y: None)(event.x, event.y)
+        getattr(self.current_shape, 'show_rubber', lambda canvas: None)(self.canvas)
 
     def on_mouse_up(self, event):
-        if not self.current_shape:
-            return
-        self.current_shape.update(event.x, event.y)
-        if len(self.shapes) < self.MAX_SHAPES:
-            self.shapes.append(self.current_shape)
-            self.current_shape.finalize(self.canvas)
+        update_and_finalize = lambda shape: (
+            shape.update(event.x, event.y),
+            shape.finalize(self.canvas),
+            self.shapes.append(shape),
             self.update_shapes_count()
-        else:
-            messagebox.showwarning("Обмеження", "Досягнуто максимум — 112 об'єктів")
+        )
+        update_and_finalize(self.current_shape) if self.current_shape and len(self.shapes) < self.MAX_SHAPES else \
+            messagebox.showwarning("Обмеження", f"Досягнуто максимум — {self.MAX_SHAPES} об'єктів") if self.current_shape else None
         self.current_shape = None
+
 
     def update_shapes_count(self):
         self.shapes_count_label.config(text=f"Об'єктів: {len(self.shapes)}/{self.MAX_SHAPES}")

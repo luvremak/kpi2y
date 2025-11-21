@@ -1,5 +1,4 @@
 MAX_SHAPES = 112
-
 SHAPE_NAMES = {
     'point': 'Точка',
     'line': 'Лінія',
