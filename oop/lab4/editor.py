@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import Menu, filedialog, messagebox
 from .shapes.shape_factory import ShapeFactory
 from .utils.constants import MAX_SHAPES, SHAPE_NAMES
-from .ui.table_window import TableWindow
+from .table_window import TableWindow
 import json
 
 
