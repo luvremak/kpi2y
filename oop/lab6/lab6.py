@@ -1,102 +1,97 @@
 import tkinter as tk
-from tkinter import messagebox, simpledialog
+from tkinter import messagebox
 import subprocess
 import sys
+import os
+import socket
+import json
 import time
 
-class Lab6Application:
+class Lab6App:
     def __init__(self, root):
         self.root = root
-        self.root.title("Lab6 - Головна програма")
-        self.root.geometry("400x300")
+        self.root.title("Lab6 - Головне вікно")
+        self.root.geometry("300x300+100+100")
         
-        self.n = None
-        self.min_val = None
-        self.max_val = None
+        # Обробка закриття вікна
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+
+        # Елементи інтерфейсу
+        tk.Label(root, text="Кількість (N):").pack(pady=5)
+        self.entry_n = tk.Entry(root)
+        self.entry_n.insert(0, "10")
+        self.entry_n.pack(pady=5)
+
+        tk.Label(root, text="Min значення:").pack(pady=5)
+        self.entry_min = tk.Entry(root)
+        self.entry_min.insert(0, "0.0")
+        self.entry_min.pack(pady=5)
+
+        tk.Label(root, text="Max значення:").pack(pady=5)
+        self.entry_max = tk.Entry(root)
+        self.entry_max.insert(0, "100.0")
+        self.entry_max.pack(pady=5)
+
+        btn = tk.Button(root, text="Виконати / Оновити", command=self.send_update, bg="#4CAF50", fg="white")
+        btn.pack(pady=20, fill=tk.X, padx=20)
+
+        # Зберігаємо процеси
+        self.proc_obj2 = None
+        self.proc_obj3 = None
         
-        self.create_widgets()
+        # Автоматичний запуск компонентів при старті
+        self.launch_components()
+
+    def launch_components(self):
+        current_dir = os.path.dirname(os.path.abspath(__file__))
         
-    def create_widgets(self):
-        title = tk.Label(self.root, text="Лабораторна робота 6", 
-                        font=("Arial", 16, "bold"))
-        title.pack(pady=20)
+        # Запускаємо Object2
+        path_obj2 = os.path.join(current_dir, "Object2.py")
+        self.proc_obj2 = subprocess.Popen([sys.executable, path_obj2])
         
-        info = tk.Label(self.root, text="Введіть параметри для генерації вектора",
-                       font=("Arial", 10))
-        info.pack(pady=10)
+        # Запускаємо Object3
+        path_obj3 = os.path.join(current_dir, "Object3.py")
+        self.proc_obj3 = subprocess.Popen([sys.executable, path_obj3])
         
-        btn_input = tk.Button(self.root, text="Ввести параметри", 
-                             command=self.input_parameters,
-                             font=("Arial", 12), bg="#4CAF50", fg="white",
-                             padx=20, pady=10)
-        btn_input.pack(pady=10)
-        
-        self.btn_object2 = tk.Button(self.root, text="Запустити Object2 (Генерація)", 
-                                     command=self.run_object2,
-                                     font=("Arial", 12), bg="#2196F3", fg="white",
-                                     padx=20, pady=10, state=tk.DISABLED)
-        self.btn_object2.pack(pady=5)
-        
-        self.btn_object3 = tk.Button(self.root, text="Запустити Object3 (Графік)", 
-                                     command=self.run_object3,
-                                     font=("Arial", 12), bg="#FF9800", fg="white",
-                                     padx=20, pady=10, state=tk.DISABLED)
-        self.btn_object3.pack(pady=5)
-        
-        self.status_label = tk.Label(self.root, text="Статус: Очікування введення", 
-                                     font=("Arial", 9), fg="gray")
-        self.status_label.pack(pady=20)
-        
-    def input_parameters(self):
-        n = simpledialog.askinteger("Введення", "Введіть кількість елементів (n):",
-                                   minvalue=1, maxvalue=1000)
-        if n is None:
-            return
-            
-        min_val = simpledialog.askfloat("Введення", "Введіть мінімальне значення (Min):")
-        if min_val is None:
-            return
-            
-        max_val = simpledialog.askfloat("Введення", "Введіть максимальне значення (Max):")
-        if max_val is None:
-            return
-            
-        if min_val >= max_val:
-            messagebox.showerror("Помилка", "Min повинно бути менше Max!")
-            return
-            
-        self.n = n
-        self.min_val = min_val
-        self.max_val = max_val
-        
-        self.btn_object2.config(state=tk.NORMAL)
-        self.btn_object3.config(state=tk.NORMAL)
-        
-        self.status_label.config(text=f"Параметри: n={n}, Min={min_val}, Max={max_val}")
-        messagebox.showinfo("Успіх", f"Параметри збережено:\nn = {n}\nMin = {min_val}\nMax = {max_val}")
-        
-    def run_object2(self):
-        if self.n is None:
-            messagebox.showwarning("Увага", "Спочатку введіть параметри!")
-            return
-            
+        print("Компоненти запущено. Очікування ініціалізації...")
+        # Даємо час програмам запуститися і відкрити порти
+        time.sleep(1.5) 
+
+    def send_update(self):
         try:
-            subprocess.Popen([sys.executable, "object2.py", 
-                            str(self.n), str(self.min_val), str(self.max_val)])
-            self.status_label.config(text="Object2 запущено")
-            messagebox.showinfo("Інформація", "Object2 запущено. Дані будуть згенеровані та скопійовані в буфер обміну.")
-        except Exception as e:
-            messagebox.showerror("Помилка", f"Не вдалося запустити Object2:\n{e}")
+            n = int(self.entry_n.get())
+            min_val = float(self.entry_min.get())
+            max_val = float(self.entry_max.get())
+
+            if min_val >= max_val or n <= 0:
+                messagebox.showerror("Помилка", "Перевірте вхідні дані!")
+                return
+
+            data = {"n": n, "min": min_val, "max": max_val}
             
-    def run_object3(self):
-        try:
-            subprocess.Popen([sys.executable, "object3.py"])
-            self.status_label.config(text="Object3 запущено")
-            messagebox.showinfo("Інформація", "Object3 запущено. Графік буде побудовано з даних буфера обміну.")
-        except Exception as e:
-            messagebox.showerror("Помилка", f"Не вдалося запустити Object3:\n{e}")
+            # ВІДПРАВКА ДАНИХ НА OBJECT2 (Порт 65432)
+            # Lab6 спілкується лише з Object2, а Object2 вже передасть далі на Object3
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.connect(('127.0.0.1', 65432))
+                    s.sendall(json.dumps(data).encode('utf-8'))
+                    print(f"Дані відправлено в Object2: {data}")
+            except ConnectionRefusedError:
+                messagebox.showerror("Помилка зв'язку", "Object2 ще не готовий або закритий.")
+
+        except ValueError:
+            messagebox.showerror("Помилка", "Введіть коректні числа.")
+
+    def on_close(self):
+        # Примусове завершення дочірніх процесів
+        if self.proc_obj2:
+            self.proc_obj2.terminate()
+        if self.proc_obj3:
+            self.proc_obj3.terminate()
+        self.root.destroy()
+        sys.exit()
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = Lab6Application(root)
+    app = Lab6App(root)
     root.mainloop()
